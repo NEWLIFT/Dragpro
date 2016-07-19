@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>下拉框</title>
+	<style>
+		*{
+			margin:0px;
+			padding:0px;
+		}
+		li{
+			list-style:none;
+		
+			}
+		#box{
+				margin:50px auto;
+				width:500px;
+				height:400px;
+			}
+		#box li{
+			height:30px;
+			width:100%;
+			margin-bottom:5px;
+			line-height:30px;
+			background:pink;
+			
+		}
+		
+		#box li:hover{
+			
+			background:yellowgreen;
+			
+		}
+		
+		#box input{
+			height:30px;
+			width:100%;
+			margin-bottom:10px;
+		}
+		
+		#box  ul{
+			display:none;
+		}
+		#box .c2{
+			
+			background:red;
+			
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+				
+				var box=document.getElementById("box");
+				
+				var ul=box.querySelector("ul");
+				
+				var lis=box.querySelectorAll("li");
+				
+				var inp=document.querySelector("input");
+				
+				
+				inp.onclick=function(ev){
+					ev.cancelBubble=true;
+					ul.style.display="block";
+	
+				}
+				
+				
+					
+				document.onclick=function(){
+					
+					ul.style.display="none";
+				}
+				
+				var lastnum=0;
+				
+				
+				inp.oninput=function(){
+					
+					var str=this.value;
+					
+					
+					
+					for(var i=0;i<lis.length;i++){
+					
+						if(lis[i].innerHTML.indexOf(str)!=-1){
+							
+							lis[i].style.display="block";
+							
+						}else{
+							
+							lis[i].style.display="none";
+							
+						}
+						
+						
+					}
+					
+					
+				}
+				
+				inp.onkeydown=function(ev){
+					
+					if(ev.keyCode==40){
+						
+						lastnum++;
+						
+						if(lastnum>lis.length-1){
+							
+							lastnum=lis.length-1;
+							
+						}
+						
+						for(var i=0;i<lis.length;i++){
+							
+							lis[i].check=false;
+							
+						}
+						
+						lis[lastnum].check=true;
+						
+						change();
+						
+					}
+					
+					
+					
+					if(ev.keyCode==38){
+						
+						lastnum--;
+						
+						if(lastnum<0){
+							
+							lastnum=0;
+							
+						}
+						
+						for(var i=0;i<lis.length;i++){
+							
+							lis[i].check=false;
+							
+						}
+						
+						lis[lastnum].check=true;
+						
+						change();
+						
+					}
+					
+				}
+				
+				
+				
+				ul.onmousedown=function(){
+					
+					return false;
+					
+				}
+				
+				
+				for(var i=0;i<lis.length;i++){
+					
+					lis[i].check=false;
+					lis[i].index=i;
+					lis[i].onclick=function(ev){
+						
+						ev.cancelBubble=true;
+						
+						if(ev.ctrlKey){
+							
+							ev.cancelBubble=true;
+							
+							//点击的这个的check的值  取反
+							this.check=!this.check;
+							
+							lastnum=this.index;
+								
+
+						}else if(ev.shiftKey){
+							
+							ev.cancelBubble=true;
+							
+							var startnum=Math.min(lastnum,this.index);
+							
+							var endnum=Math.max(lastnum,this.index);
+							
+							for(var i=0;i<lis.length;i++){
+								
+								lis[i].check=false;
+								
+								
+							}
+							
+							
+							for(var i=startnum;i<=endnum;i++){
+								
+								lis[i].check=true;
+								
+								//console.log(i);
+							}
+							
+							
+							
+							
+							
+							
+						}else{
+							
+			
+								
+								for(var i=0;i<lis.length;i++){
+									
+									if(lis[i]!=this){
+										
+										lis[i].check=false;
+										
+									}
+									
+									
+		
+								}
+								this.check=!this.check;
+								
+								lastnum=this.index;
+														
+						}
+						
+					
+						change();
+				
+					
+						
+					}
+					
+					function  change(){
+						
+						inp.value="";
+						
+						for(var i=0;i<lis.length;i++){
+							
+							if(lis[i].check){
+								
+								inp.value+=lis[i].innerHTML;
+								
+								lis[i].className="c2";
+								
+								
+							}else{
+								
+								lis[i].className=""
+								
+							}
+							
+						}
+						
+						
+					}
+					
+					
+						
+				
+					
+					
+				}
+				
+				
+			
+				
+		}
+		
+	</script>
+</head>
+<body>
+	<div id="box">
+		<input type="text" />
+		<ul>
+			<li>《2016世界末日》</li>
+			<li>《完美世界》</li>
+			<li>《遮天》</li>
+			<li>《神墓》</li>
+			<li>《雪婷霖住》</li>
+			<li>《金刚经》</li>
+			<li>《艺术》</li>
+		</ul>
+		
+	</div>
+</body>
+</html>
