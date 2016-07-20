@@ -4,34 +4,11 @@
 	<meta charset="UTF-8" />
 	<title>下拉框</title>
 	<style>
-		*{
-			margin:0px;
-			padding:0px;
-		}
-		li{
-			list-style:none;
-		
-			}
-		#box{
-				margin:50px auto;
-				width:500px;
-				height:400px;
-			}
-		#box li{
-			height:30px;
-			width:100%;
-			margin-bottom:5px;
-			line-height:30px;
-			background:pink;
-			
-		}
-		
-		#box li:hover{
-			
-			background:yellowgreen;
-			
-		}
-		
+		*{ margin:0px; padding:0px; }
+		li{ list-style:none;}
+		#box{ margin:50px auto; width:500px; height:400px; }
+		#box li{height:30px;width:100%;margin-bottom:5px;line-height:30px;background:pink;}
+		#box li:hover{ background:yellowgreen;}
 		#box input{
 			height:30px;
 			width:100%;
@@ -42,27 +19,20 @@
 			display:none;
 		}
 		#box .c2{
-			
 			background:red;
-			
 		}
 	</style>
 	<script type="text/javascript">
 		window.onload=function(){
-				
+				// 大牛是个搅屎棍 
 				var box=document.getElementById("box");
-				
 				var ul=box.querySelector("ul");
-				
 				var lis=box.querySelectorAll("li");
-				
 				var inp=document.querySelector("input");
-				
 				
 				inp.onclick=function(ev){
 					ev.cancelBubble=true;
 					ul.style.display="block";
-	
 				}
 	
 				document.onclick=function(){
@@ -71,7 +41,6 @@
 				}
 				
 				var lastnum=0;
-				
 				
 				inp.oninput=function(){
 					
