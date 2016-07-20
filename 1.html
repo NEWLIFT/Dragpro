@@ -9,19 +9,11 @@
 		#box{ margin:50px auto; width:500px; height:400px; }
 		#box li{height:30px;width:100%;margin-bottom:5px;line-height:30px;background:pink;}
 		#box li:hover{ background:yellowgreen;}
-		#box input{
-			height:30px;
-			width:100%;
-			margin-bottom:10px;
-		}
-		
-		#box  ul{
-			display:none;
-		}
-		#box .c2{
-			background:red;
-		}
+		#box input{ height:30px; width:100%; margin-bottom:10px; }
+		#box  ul{ display:none; }
+		#box .c2{ background:red;}
 	</style>
+
 	<script type="text/javascript">
 		window.onload=function(){
 				// 大牛是个搅屎棍 
@@ -34,181 +26,95 @@
 					ev.cancelBubble=true;
 					ul.style.display="block";
 				}
-	
-				document.onclick=function(){
-					
+				document.onclick=function(){	
 					ul.style.display="none";
 				}
-				
 				var lastnum=0;
-				
-				inp.oninput=function(){
-					
+				inp.oninput=function(){	
 					var str=this.value;
-
 					for(var i=0;i<lis.length;i++){
-					
 						if(lis[i].innerHTML.indexOf(str)!=-1){
-							
 							lis[i].style.display="block";
-							
 						}else{
-							
 							lis[i].style.display="none";
-							
 						}
-						
-						
 					}
-					
-					
 				}
-				
-				inp.onkeydown=function(ev){
-					
+				inp.onkeydown=function(ev){	
 					if(ev.keyCode==40){
-						
 						lastnum++;
-						
 						if(lastnum>lis.length-1){
-							
 							lastnum=lis.length-1;
-							
 						}
-						
-						for(var i=0;i<lis.length;i++){
-							
+						for(var i=0;i<lis.length;i++){	
 							lis[i].check=false;
-							
 						}
-						
 						lis[lastnum].check=true;
-						
 						change();
-						
 					}
-
-					if(ev.keyCode==38){
-						
+					if(ev.keyCode==38){	
 						lastnum--;
-						
 						if(lastnum<0){
-							
 							lastnum=0;
-							
 						}
-						
-						for(var i=0;i<lis.length;i++){
-							
+						for(var i=0;i<lis.length;i++){	
 							lis[i].check=false;
-							
 						}
-						
 						lis[lastnum].check=true;
-						
 						change();
-						
 					}
-					
 				}
-
 				ul.onmousedown=function(){
-					
 					return false;
-					
 				}
-				
-				
-				for(var i=0;i<lis.length;i++){
-					
+				for(var i=0;i<lis.length;i++){	
 					lis[i].check=false;
 					lis[i].index=i;
 					lis[i].onclick=function(ev){
-						
 						ev.cancelBubble=true;
-						
 						if(ev.ctrlKey){
-							
 							ev.cancelBubble=true;
-							
 							//点击的这个的check的值  取反
 							this.check=!this.check;
-							
 							lastnum=this.index;
-								
-
 						}else if(ev.shiftKey){
-							
 							ev.cancelBubble=true;
-							
 							var startnum=Math.min(lastnum,this.index);
-							
 							var endnum=Math.max(lastnum,this.index);
-							
 							for(var i=0;i<lis.length;i++){
-								
 								lis[i].check=false;
-								
-								
 							}
-							
-							
-							for(var i=startnum;i<=endnum;i++){
-								
+							for(var i=startnum;i<=endnum;i++){	
 								lis[i].check=true;
-								
 								//console.log(i);
 							}
 	
 						}else{
-
-								for(var i=0;i<lis.length;i++){
-									
-									if(lis[i]!=this){
-										
-										lis[i].check=false;
-										
-									}
-
+							for(var i=0;i<lis.length;i++){	
+								if(lis[i]!=this){
+									lis[i].check=false;
 								}
-								this.check=!this.check;
-								
-								lastnum=this.index;
-														
+							}
+							this.check=!this.check;
+							lastnum=this.index;	
 						}
-						
-					
 						change();
-	
 					}
 					
 					function  change(){
-						
 						inp.value="";
-						
 						for(var i=0;i<lis.length;i++){
-							
 							if(lis[i].check){
-								
 								inp.value+=lis[i].innerHTML;
-								
 								lis[i].className="c2";
-								
-								
 							}else{
-								
 								lis[i].className=""
-								
 							}
-							
 						}	
 					}
-
-					
 				}
 	
 		}
-		
 	</script>
 </head>
 <body>
